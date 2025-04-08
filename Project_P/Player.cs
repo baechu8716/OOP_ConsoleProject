@@ -9,8 +9,21 @@ namespace Project_P
 {
     public class Player
     {
-        public Vector2 position { get; set; }
-        public bool[,] map { get; set; }
+        private Vector2 position;
+        public Vector2 Postiion
+        {
+            get { return position; }
+            set { position = value; }
+        }
+
+
+        private bool[,] map;
+        public bool[,] Map
+        {
+            get { return map; }
+            set { map = value; }
+        }
+
 
         private Inventory inventory;
         public Inventory Inventory

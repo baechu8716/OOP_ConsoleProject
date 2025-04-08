@@ -36,9 +36,9 @@ namespace Project_P.Scenes
         {
             if (GameManager.prevSceneName == "Select")
             {
-                GameManager.Player.position = new Vector2(1, 2);
+                GameManager.Player.Postiion = new Vector2(1, 2);
             }
-            GameManager.Player.map = map;
+            GameManager.Player.Map = map;
         }
     }
 }

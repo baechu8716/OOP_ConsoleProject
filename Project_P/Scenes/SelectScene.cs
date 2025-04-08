@@ -14,7 +14,7 @@ namespace Project_P.Scenes
         Monster startingSquirtle = MonsterFactory.Create(MonsterType.Squirtle, new Vector2(94, 2));
         public SelectScene()
         {
-            name = "Selecet";
+            name = "Select";
         }   
 
         public override void Render()
