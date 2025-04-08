@@ -23,6 +23,7 @@ namespace Project_P.Scenes
             };
 
             map = new bool[6 , 20];
+
             for (int y = 0; y < map.GetLength(0); y++)
             {
                 for (int x = 0; x < map.GetLength(1); x++)
@@ -31,22 +32,6 @@ namespace Project_P.Scenes
                 }
             }
 
-        }
-
-
-        public override void Render()
-        {
-
-        }
-
-        public override void Result()
-        {
-            
-        }
-
-        public override void Update()
-        {
-            
         }
         public override void Enter()
         {

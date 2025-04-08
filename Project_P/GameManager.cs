@@ -10,7 +10,7 @@ namespace Project_P
     public static class GameManager
     {
         private static Dictionary<string, BaseScene> sceneDic;
-        private static BaseScene curScene;
+        public static BaseScene curScene;
         private static string prevSceneName;
         private static bool gameOver;
 

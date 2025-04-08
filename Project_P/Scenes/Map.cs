@@ -13,6 +13,7 @@ namespace Project_P.Scenes
 
         public override void Render()
         {
+            Console.WriteLine($"{GameManager.curScene.name}");
             PrintMap();
         }
 
@@ -23,13 +24,11 @@ namespace Project_P.Scenes
         public override void Result()
         {
 
-        }
-
-        
+        }  
 
         public void PrintMap()
         {
-            Console.SetCursorPosition(0, 0);
+            Console.SetCursorPosition(0, 1);
             for (int y = 0; y < map.GetLength(0); y++)
             {
                 for (int x = 0; x < map.GetLength(1); x++)
@@ -42,8 +41,8 @@ namespace Project_P.Scenes
                     {
                         Console.Write('#');
                     }
-                    Console.WriteLine();
                 }
+                Console.WriteLine();
             }
 
         }
