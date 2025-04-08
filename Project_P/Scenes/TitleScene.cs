@@ -38,7 +38,7 @@ namespace Project_P.Scenes
             switch(input)
             {
                 case ConsoleKey.D1:
-                    GameManager.ChangeScene("Village");
+                    GameManager.ChangeScene("Select");
                     break;
                 case ConsoleKey.D2:
                     GameManager.End();

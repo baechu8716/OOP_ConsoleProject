@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_P.Monsters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,17 @@ namespace Project_P
 {
     public class Player
     {
-        public Vector2 position;
-        public bool[,] map;
+        public Vector2 position { get; set; }
+        public bool[,] map { get; set; }
+
+        private Inventory inventory;
+        public Inventory Inventory
+        {
+            get { return inventory; }
+            set { inventory = value; }
+
+        }
+
 
         public void Print()
         {

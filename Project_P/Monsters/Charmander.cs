@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_P.Monster
+namespace Project_P.Monsters
 {
     public class Charmander : Monster
     {
@@ -53,14 +53,13 @@ namespace Project_P.Monster
                 if (isEnemy)
                 {
                     string enemy = new string(charmander[y].Reverse().ToArray());
-                    Console.WriteLine(enemy);
+                    Console.Write(enemy);
                 }
                 else
                 {
-                    Console.WriteLine(charmander[y]);
+                    Console.Write(charmander[y]);
                 }
-
-                Console.ResetColor();
+                Console.WriteLine();
             }
         }
     }

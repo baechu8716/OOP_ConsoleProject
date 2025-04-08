@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_P.Monster
+namespace Project_P.Monsters
 {
     public class Squirtle : Monster
     {
@@ -48,14 +48,13 @@ namespace Project_P.Monster
                 if (isEnemy)
                 {
                     string enemy = new string(squirtle[y].Reverse().ToArray());
-                    Console.WriteLine(enemy);
+                    Console.Write(enemy);
                 }
                 else
                 {
-                    Console.WriteLine(squirtle[y]);
+                    Console.Write(squirtle[y]);
                 }
-
-                Console.ResetColor();
+                Console.WriteLine();
             }
         }
     }

@@ -31,12 +31,10 @@ namespace Project_P.Scenes
                     map[y, x] = mapData[y][x] == '#' ? false : true;
                 }
             }
-
-            
         }
         public override void Enter()
         {
-            if (GameManager.prevSceneName == "Title")
+            if (GameManager.prevSceneName == "Select")
             {
                 GameManager.Player.position = new Vector2(1, 2);
             }

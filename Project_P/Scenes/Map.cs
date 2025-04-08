@@ -17,6 +17,8 @@ namespace Project_P.Scenes
             PrintMap();
             // Console.WriteLine($"초기 위치: ({GameManager.Player.position.x}, {GameManager.Player.position.y}");
             GameManager.Player.Print();
+            Console.SetCursorPosition(0, map.GetLength(0) + 2);
+            GameManager.Player.Inventory.PrintAll();
         }
 
         public override void Update()

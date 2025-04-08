@@ -1,4 +1,5 @@
-﻿using Project_P.Scenes;
+﻿using Project_P.Monsters;
+using Project_P.Scenes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +23,7 @@ namespace Project_P
             Start();
 
             while(gameOver == false)
-            {
-                Console.Clear();
+            {    
                 curScene.Render();
                 curScene.Input();
                 Console.WriteLine();
@@ -31,6 +31,7 @@ namespace Project_P
                 Console.WriteLine();
                 curScene.Result();
                 Console.WriteLine();
+                Console.Clear();
             }
             
 
@@ -41,16 +42,20 @@ namespace Project_P
         public static void Start()
         {
             Console.CursorVisible = false;
+            Console.SetWindowSize(150, 30); 
+            Console.SetBufferSize(150, 30);
 
             gameOver = false;
 
             player = new Player();
+            player.Inventory = new Inventory(6);
 
             sceneDic = new Dictionary<string, BaseScene>();
             sceneDic.Add("Title", new TitleScene());
             sceneDic.Add("Village", new VillageScene());
+            sceneDic.Add("Select", new SelectScene());
 
-            
+
 
             // 초기 현재씬 설정
             curScene = sceneDic["Title"];
