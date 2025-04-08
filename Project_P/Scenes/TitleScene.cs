@@ -8,7 +8,10 @@ namespace Project_P.Scenes
 {
     public class TitleScene : BaseScene
     {
-
+        public TitleScene()
+        {
+            name = "Title";
+        }
         public override void Render()
         {
             Console.WriteLine("***************************************************");

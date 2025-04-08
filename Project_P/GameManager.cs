@@ -11,8 +11,10 @@ namespace Project_P
     {
         private static Dictionary<string, BaseScene> sceneDic;
         public static BaseScene curScene;
-        private static string prevSceneName;
+        public static string prevSceneName;
         private static bool gameOver;
+        private static Player player;
+        public static Player Player { get { return player; } }
 
         // 끝날 떄 까지 반복 실행
         public static void Run()
@@ -40,11 +42,15 @@ namespace Project_P
         {
             Console.CursorVisible = false;
 
-            gameOver = false;    
+            gameOver = false;
+
+            player = new Player();
 
             sceneDic = new Dictionary<string, BaseScene>();
             sceneDic.Add("Title", new TitleScene());
             sceneDic.Add("Village", new VillageScene());
+
+            
 
             // 초기 현재씬 설정
             curScene = sceneDic["Title"];

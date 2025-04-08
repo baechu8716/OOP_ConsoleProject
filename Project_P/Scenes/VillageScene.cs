@@ -32,11 +32,15 @@ namespace Project_P.Scenes
                 }
             }
 
+            
         }
         public override void Enter()
         {
-            
-
+            if (GameManager.prevSceneName == "Title")
+            {
+                GameManager.Player.position = new Vector2(1, 2);
+            }
+            GameManager.Player.map = map;
         }
     }
 }

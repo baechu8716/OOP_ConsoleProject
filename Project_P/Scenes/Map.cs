@@ -15,11 +15,13 @@ namespace Project_P.Scenes
         {
             Console.WriteLine($"{GameManager.curScene.name}");
             PrintMap();
+            // Console.WriteLine($"초기 위치: ({GameManager.Player.position.x}, {GameManager.Player.position.y}");
+            GameManager.Player.Print();
         }
 
         public override void Update()
         {
-
+            GameManager.Player.Move(input);
         }
         public override void Result()
         {
