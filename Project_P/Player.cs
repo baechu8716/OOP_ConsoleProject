@@ -63,7 +63,7 @@ namespace Project_P
                 default:
                     break;
             }
-            if (map[targetPos.y, targetPos.x] == true)
+            if(map[targetPos.y, targetPos.x] == true)
             {
                 position = targetPos;
             }

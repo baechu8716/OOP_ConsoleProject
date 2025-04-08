@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_P.GameObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +11,16 @@ namespace Project_P.Scenes
     {
         protected string[] mapData;
         protected bool[,] map;
+        protected List<GameObject> gameObjects;
 
         public override void Render()
         {
             Console.WriteLine($"{GameManager.curScene.name}");
             PrintMap();
-            // Console.WriteLine($"초기 위치: ({GameManager.Player.position.x}, {GameManager.Player.position.y}");
+            foreach(GameObject gameobject in gameObjects)
+            {
+                gameobject.Print();
+            }
             GameManager.Player.Print();
             Console.SetCursorPosition(0, map.GetLength(0) + 2);
             GameManager.Player.Inventory.PrintAll();
@@ -27,7 +32,18 @@ namespace Project_P.Scenes
         }
         public override void Result()
         {
-
+            foreach(GameObject gameobject in gameObjects)
+            {
+                if(gameobject.position.x == GameManager.Player.Postiion.x &&
+                    gameobject.position.y == GameManager.Player.Postiion.y)
+                {
+                    gameobject.Interact(GameManager.Player);
+                    if (gameobject.isOnce == true)
+                    {
+                        gameObjects.Remove(gameobject);
+                    }
+                }
+            }
         }  
 
         public void PrintMap()

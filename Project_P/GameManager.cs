@@ -54,6 +54,7 @@ namespace Project_P
             sceneDic.Add("Title", new TitleScene());
             sceneDic.Add("Village", new VillageScene());
             sceneDic.Add("Select", new SelectScene());
+            sceneDic.Add("Field", new FieldScene());
 
 
 
@@ -65,7 +66,10 @@ namespace Project_P
         public static void ChangeScene(string name)
         {
             prevSceneName = curScene.name;
-
+            if (curScene.name == "Village")
+            {
+                sceneDic.Remove("Select");
+            }
             curScene = sceneDic[name];
             curScene.Enter();
         }

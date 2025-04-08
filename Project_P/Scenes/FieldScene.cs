@@ -2,17 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Project_P.Scenes
 {
-    public class VillageScene : Map
+    public class FieldScene : Map
     {
-        public VillageScene()
+        public FieldScene()
         {
-            name = "Village";
+            name = "Field";
             mapData = new string[]
             {
                 "####################",
@@ -23,7 +23,7 @@ namespace Project_P.Scenes
                 "####################"
             };
 
-            map = new bool[6 , 20];
+            map = new bool[6, 20];
 
             for (int y = 0; y < map.GetLength(0); y++)
             {
@@ -34,17 +34,13 @@ namespace Project_P.Scenes
             }
 
             gameObjects = new List<GameObject>();
-            gameObjects.Add(new Place("Field", new Vector2(16, 1)));
+            gameObjects.Add(new Place("Village", new Vector2(2, 1)));
         }
         public override void Enter()
         {
-            if (GameManager.prevSceneName == "Select")
+            if (GameManager.prevSceneName == "Village")
             {
-                GameManager.Player.Postiion = new Vector2(1, 2);
-            }
-            if (GameManager.prevSceneName == "Field")
-            {
-                GameManager.Player.Postiion = new Vector2(16, 1);
+                GameManager.Player.Postiion = new Vector2(2, 1);
             }
             GameManager.Player.Map = map;
         }
