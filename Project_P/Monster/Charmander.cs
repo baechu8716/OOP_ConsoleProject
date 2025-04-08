@@ -36,17 +36,31 @@ namespace Project_P.Monster
         public Charmander(Vector2 position)
             :base("파이리", "불꽃", 1, 0, 10, 100, ConsoleColor.Red, 'F', position)
         {
-            AddSkill(new Skill("불꽃 세례", 40));
-            AddSkill(new Skill("불꽃 방사", 90));
-            AddSkill(new Skill("할퀴기", 40));
+            AddSkill(new Skill("불꽃 세례", 40, 25));
+            AddSkill(new Skill("불꽃 방사", 90, 15));
+            AddSkill(new Skill("할퀴기", 40, 35));
+            AddSkill(new Skill("베어가르기", 70, 15));
         }
 
-        public void print()
+        // 적일 경우 좌우 대칭하여 출력
+        public override void Print(bool isEnemy)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            foreach (string s in charmander)
+            for (int y = 0; y < charmander.Length; y++)
             {
-                Console.WriteLine(s);
+                Console.SetCursorPosition(Position.x, Position.y + y);
+
+                if (isEnemy)
+                {
+                    string enemy = new string(charmander[y].Reverse().ToArray());
+                    Console.WriteLine(enemy);
+                }
+                else
+                {
+                    Console.WriteLine(charmander[y]);
+                }
+
+                Console.ResetColor();
             }
         }
     }

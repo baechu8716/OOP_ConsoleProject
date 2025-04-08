@@ -43,7 +43,10 @@ namespace Project_P.Monster
         {
             if (skillIndex >= 0 && skillIndex < Skills.Count)
             {
-                Skills[skillIndex].Use(this, target);
+                if (Skills[skillIndex].CanUse())
+                {
+                    Skills[skillIndex].Use(this, target);
+                }        
             }
             else 
             {
@@ -70,6 +73,12 @@ namespace Project_P.Monster
                 HP += 20;
                 Console.WriteLine($"{Name}이(가) 레벨 {Level}로 올랐습니다!");
             }
+        }
+
+        public virtual void Print(bool isEnemy = false)
+        {
+            Console.SetCursorPosition(Position.x, Position.y);
+            Console.Write(Symbol);
         }
     }
 }

@@ -14,6 +14,10 @@ namespace Project_P.Monster
             {
                 case MonsterType.Charmander:
                     return new Charmander(position);
+                case MonsterType.Bulbasaur:
+                    return new Bulbasaur(position);
+                case MonsterType.Squirtle:
+                    return new Squirtle(position);
                 default:
                     throw new ArgumentException("알 수 없는 몬스터 타입");
             }
