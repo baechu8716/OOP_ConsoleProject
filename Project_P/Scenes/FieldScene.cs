@@ -16,10 +16,10 @@ namespace Project_P.Scenes
             mapData = new string[]
             {
                 "####################",
-                "#   #  #     #     #",
-                "#   #  #     #     #",
-                "## ##  ### ###     #",
-                "#                  #",
+                "#      #     #     #",
+                "#   #  #        ## #",
+                "#   #  #######   # #",
+                "#   #            # #",
                 "####################"
             };
 
@@ -34,13 +34,13 @@ namespace Project_P.Scenes
             }
 
             gameObjects = new List<GameObject>();
-            gameObjects.Add(new Place("Village", new Vector2(2, 1)));
+            gameObjects.Add(new Place("Village", new Vector2(2, 4)));
         }
         public override void Enter()
         {
             if (GameManager.prevSceneName == "Village")
             {
-                GameManager.Player.Postiion = new Vector2(2, 1);
+                GameManager.Player.Postiion = new Vector2(2, 4);
             }
             GameManager.Player.Map = map;
         }

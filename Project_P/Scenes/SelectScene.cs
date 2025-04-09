@@ -43,11 +43,11 @@ namespace Project_P.Scenes
                     GameManager.ChangeScene("Village");
                     break;
                 case ConsoleKey.D2:
-                    GameManager.Player.Inventory.monsters[0] = startingSquirtle;
+                    GameManager.Player.Inventory.monsters[0] = startingBulbasaur;
                     GameManager.ChangeScene("Village");
                     break;
                 case ConsoleKey.D3:
-                    GameManager.Player.Inventory.monsters[0] = startingBulbasaur;
+                    GameManager.Player.Inventory.monsters[0] = startingSquirtle; 
                     GameManager.ChangeScene("Village");
                     break;
                 default: break;
