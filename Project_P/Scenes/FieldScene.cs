@@ -37,18 +37,17 @@ namespace Project_P.Scenes
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Place("Village", new Vector2(2, 4)));
             Monster fieldBulbasaur = MonsterFactory.Create(MonsterType.Bulbasaur, new Vector2(10, 4));
-            fieldBulbasaur.scene = "Battle";
             gameObjects.Add(fieldBulbasaur);
         }
         public override void Enter()
         {
             if (GameManager.prevSceneName == "Village")
             {
-                GameManager.Player.Postiion = new Vector2(2, 4);
+                GameManager.Player.Position = new Vector2(2, 4);
             }
             else if (GameManager.prevSceneName == "Battle")
             {
-                GameManager.Player.Postiion = new Vector2(10, 4);
+                GameManager.Player.Position = new Vector2(10, 4);
             }
             GameManager.Player.Map = map;
         }

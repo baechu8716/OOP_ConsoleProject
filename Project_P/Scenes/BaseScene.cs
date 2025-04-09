@@ -18,6 +18,10 @@ namespace Project_P.Scenes
             input = Console.ReadKey(true).Key;
         }
 
+        public void ResetInput()
+        {
+            input = default(ConsoleKey);
+        }
         public abstract void Update();
 
         public abstract void Result();

@@ -24,7 +24,7 @@ namespace Project_P
             {
                 if (monsters[i] != null)
                 {
-                    Console.WriteLine($"{monsters[i].Name}");
+                    Console.WriteLine($"{i+1}. {monsters[i].Name}");
                 }
                 else
                 {

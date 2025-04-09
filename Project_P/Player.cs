@@ -10,7 +10,7 @@ namespace Project_P
     public class Player
     {
         private Vector2 position;
-        public Vector2 Postiion
+        public Vector2 Position
         {
             get { return position; }
             set { position = value; }

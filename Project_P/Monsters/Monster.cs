@@ -21,7 +21,7 @@ namespace Project_P.Monsters
         public char Symbol { get; set; }
         public ConsoleColor Color { get; set; }
         protected List<Skill> Skills { get; set; }
-        public string scene;
+        public string scene = "Battle";
 
 
         public Monster(string name, string type, int level, int exp, int atk, int hp, ConsoleColor color, char symbol, Vector2 position)

@@ -1,11 +1,4 @@
 ﻿using Project_P.Monsters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Project_P.Scenes
 {
@@ -24,131 +17,178 @@ namespace Project_P.Scenes
             turnCount = 0;
             battleOver = false;
             stack = new Stack<string>();
+        }
+        public override void Enter()
+        {
             enemy = GameManager.CurrentEnemy;
+            Console.Clear();
         }
 
         public override void Render()
         {
-            Console.WriteLine($"야생의 {enemy.Name}가 나타났다!");
-            Console.WriteLine("어떻게 할까?");
-            Console.WriteLine("1. 싸운다");
-            Console.WriteLine("2. 도망간다.");
-            Console.WriteLine();
-        }    
+            if (stack.Count == 0)
+            {
+                stack.Push("Meet");
+            }
+            switch (stack.Peek())
+            {
+                case "Meet":
+                    Meet();
+                    break;
+                case "SelectMenu":
+                    SelectMenu();
+                    break;
+                case "SelectConfirm":
+                    SelectConfirm();
+                    break;
+                case "Battle":
+                    Battle();
+                    break;
+                
+                default: break;
+            }
+        }
 
         public override void Update()
         {
-            switch(input)
+            if (stack.Count == 0)
             {
-                case ConsoleKey.D1:
-                    BattleStart();
+                stack.Push("Meet");
+            }
+            switch (stack.Peek())
+            {
+                case "Meet":
+                    if (input == ConsoleKey.D1)
+                    {
+                        stack.Pop();
+                        stack.Push("SelectMenu");
+                    }
+                    else if (input == ConsoleKey.D2)
+                    {
+                        Console.WriteLine("도망갑니다...");
+                        stack.Pop();
+                        GameManager.ChangeScene("Field");
+                    }
                     break;
-                case ConsoleKey.D2:
-                    GameManager.ChangeScene("Field");
+                case "SelectMenu":;
+                    if (input == ConsoleKey.D0)
+                    {
+                        Console.WriteLine("전투를 종료합니다...");
+                        stack.Pop();
+                        GameManager.ChangeScene("Field");
+                    }          
+                    else
+                    {
+                        int select = (int)input - (int)ConsoleKey.D1;
+                        
+                        if (select < 0 || select >= GameManager.Player.Inventory.monsters.Length)
+                        {
+                            Console.WriteLine("잘못된 입력입니다. 1~6 또는 0을 선택하세요.");
+                            Console.ReadKey(true);
+                        }
+                        else if (GameManager.Player.Inventory.monsters[select] == null)
+                        {
+                            Console.WriteLine("빈 슬롯입니다. 다시 선택해 주세요");
+                            Console.ReadKey(true);
+                        }
+                        else
+                        {
+
+                            index = select;
+                            stack.Push("SelectConfirm");
+                        }
+                    }
+                    break;
+                    case "SelectConfirm":
+                    if (input == ConsoleKey.Y)
+                    {
+                        if (index >= 0 && index < GameManager.Player.Inventory.monsters.Length)
+                        {
+                            Monster selectedMonster = GameManager.Player.Inventory.monsters[index];
+                            if (selectedMonster != null && selectedMonster.HP > 0)
+                            {
+                                playerMonster = selectedMonster;
+                                Console.WriteLine($"{playerMonster.Name}. 너로 정했다!");
+                                Console.ReadKey(true);
+                                stack.Push("Battle");
+                            }
+                            else if (selectedMonster?.HP <= 0)
+                            {
+                                Console.WriteLine("해당 몬스터가 전투 불능 상태입니다.");
+                                Console.ReadKey(true);
+                            }
+                        }              
+                    }
+                    else if (input == ConsoleKey.N)
+                    {
+                        stack.Pop();
+                    }
+                    else { Console.WriteLine("잘못된 선택입니다."); Console.ReadKey(true); }
+                        break;
+                case "Battle":
                     break;
                 default: break;
             }
         }
+
+
         public override void Result()
         {
 
         }
 
-        public void BattleStart()
+        public void Meet()
         {
-            stack.Push("SelectMenu");
-
-            switch (stack.Peek())
-            {
-                case "SelectMenu":
-                    SelectMenu();
-                    break;
-                case "Battle":
-                    Battle();
-                    break;
-            }
+            Console.WriteLine($"야생의 {enemy.Name}(이)가 나타났다!");
+            enemy.Print(true);
+            Console.WriteLine("어떻게 할까?");
+            Console.WriteLine("1. 싸운다");
+            Console.WriteLine("2. 도망간다.");
         }
+
         private bool AreAllMonstersFainted()
         {
             foreach (var monster in GameManager.Player.Inventory.monsters)
             {
                 if (monster != null && monster.HP > 0)
-                    return false; 
+                    return false;
+
             }
-            return true; 
+            return true;
         }
 
         public void SelectMenu()
         {
+            
             if (AreAllMonstersFainted())
             {
                 Console.WriteLine("모든 몬스터가 전투불능 상태입니다.");
-                stack.Pop();
+                stack.Clear();
                 GameManager.ChangeScene("Field");
                 return;
             }
-
-            Console.Clear();
             Console.WriteLine("어느 몬스터를 내보내겠습니까?");
             GameManager.Player.Inventory.PrintAll();
             Console.WriteLine("전투종료를 하시려면 0번");
 
-            switch (input)
-            {
-                case ConsoleKey.D1:
-                    index = 0;
-                    break;
-                case ConsoleKey.D2:
-                    index = 1;
-                    break;
-                case ConsoleKey.D3:
-                    index = 2;
-                    break;
-                case ConsoleKey.D4:
-                    index = 3;
-                    break;
-                case ConsoleKey.D5:
-                    index = 4;
-                    break;
-                case ConsoleKey.D6:
-                    index = 5;
-                    break;
-                case ConsoleKey.D0:
-                    battleOver = true;
-                    stack.Pop();
-                    GameManager.ChangeScene("Field");
-                    return;
-                default:
-                    Console.WriteLine("잘못된 입력입니다. 1~6 또는 0을 선택하세요.");
-                    break; ;
+    
+        }
+        public void SelectConfirm()
+        {
+                Console.WriteLine($"{GameManager.Player.Inventory.monsters[index].Name}를(을) 내보내시겠습니까?");
+                Console.WriteLine("Y / N");
 
-            }
-
-            if (index >= 0 && index < GameManager.Player.Inventory.monsters.Length)
-            {
-                Monster selectedMonster = GameManager.Player.Inventory.monsters[index];
-                if (selectedMonster != null && selectedMonster.HP > 0)
-                {
-                    playerMonster = selectedMonster;
-                    stack.Pop();
-                    stack.Push("Battle");
-                    turnCount = 1;
-                }
-                else
-                {
-                    Console.WriteLine("해당 몬스터가 전투 불능 상태입니다.");
-                }
-            }
         }
 
         public void Battle()
         {
-            Console.WriteLine($"턴 {turnCount}: {playerMonster.Name} vs {enemy.Name}");
+
+            Console.WriteLine($"턴 {++turnCount}: {playerMonster.Name} vs {enemy.Name}");
             playerMonster.UseSkill(0, enemy); // 플레이어 몬스터가 적을 공격
             if (enemy.HP <= 0)
             {
                 Console.WriteLine($"{enemy.Name}을(를) 쓰러뜨렸습니다!");
-                stack.Pop();
+                stack.Clear();
                 GameManager.ChangeScene("Field");
                 return;
             }
@@ -157,9 +197,10 @@ namespace Project_P.Scenes
             {
                 Console.WriteLine($"{playerMonster.Name}이(가) 전투 불능이 되었습니다!");
                 stack.Pop();
-                SelectMenu(); // 다른 몬스터 선택으로 돌아감
             }
             turnCount++;
         }
+
+
     }
 }

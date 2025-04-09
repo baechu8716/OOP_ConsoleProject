@@ -32,10 +32,10 @@ namespace Project_P.Scenes
         }
         public override void Result()
         {
-            foreach(GameObject gameobject in gameObjects)
+            foreach(GameObject gameobject in gameObjects.ToList())
             {
-                if(gameobject.position.x == GameManager.Player.Postiion.x &&
-                    gameobject.position.y == GameManager.Player.Postiion.y)
+                if(gameobject.position.x == GameManager.Player.Position.x &&
+                    gameobject.position.y == GameManager.Player.Position.y)
                 {
                     gameobject.Interact(GameManager.Player);
                     if (gameobject.isOnce == true)

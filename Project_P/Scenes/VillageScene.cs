@@ -40,11 +40,11 @@ namespace Project_P.Scenes
         {
             if (GameManager.prevSceneName == "Select")
             {
-                GameManager.Player.Postiion = new Vector2(1, 2);
+                GameManager.Player.Position = new Vector2(1, 2);
             }
             if (GameManager.prevSceneName == "Field")
             {
-                GameManager.Player.Postiion = new Vector2(16, 1);
+                GameManager.Player.Position = new Vector2(16, 1);
             }
             GameManager.Player.Map = map;
         }
