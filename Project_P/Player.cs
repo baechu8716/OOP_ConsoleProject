@@ -30,16 +30,38 @@ namespace Project_P
         {
             get { return inventory; }
             set { inventory = value; }
-
         }
 
-
+        private ItemInventory iteminventory;
+        public ItemInventory Iteminventory
+        {
+            get { return iteminventory; }
+            set { iteminventory = value; }
+        }
         public void Print()
         {
             Console.SetCursorPosition(position.x, position.y + 1);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("P");
             Console.ResetColor();
+        }
+
+        public void Action(ConsoleKey input)
+        {
+            switch (input)
+            {
+                case ConsoleKey.W:
+                case ConsoleKey.S:
+                case ConsoleKey.D:
+                case ConsoleKey.A:
+                    Move(input);
+                    break;
+                case ConsoleKey.E:
+                    Iteminventory.Open();
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void Move(ConsoleKey input)

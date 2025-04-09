@@ -17,6 +17,7 @@ namespace Project_P
             monsters = new Monster[size];
         }
 
+
         public void PrintAll()
         {
             Console.WriteLine("========포켓몬 목록========");
@@ -25,7 +26,7 @@ namespace Project_P
                 if (monsters[i] != null)
                 {
                     Console.WriteLine($"{i+1}. {monsters[i].Name}");
-                    if (monsters[i].HP <= 0)
+                    if (monsters[i].CurHP <= 0)
                     {
                         Console.WriteLine($"{i + 1}. {monsters[i].Name}\t기절상태");
                     }

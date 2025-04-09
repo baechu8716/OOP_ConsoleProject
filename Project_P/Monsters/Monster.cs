@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using static System.Formats.Asn1.AsnWriter;
 
@@ -16,7 +17,8 @@ namespace Project_P.Monsters
         public int Level { get; set; }
         public int Exp { get; set; }
         public int Atk { get; set; }
-        public int HP { get; set; }
+        public int MaxHP { get; set; }
+        public int CurHP { get; set; }
         public Vector2 Position { get; set; }
         public char Symbol { get; set; }
         public ConsoleColor Color { get; set; }
@@ -32,7 +34,8 @@ namespace Project_P.Monsters
             Level = level;
             Exp = 100 * level;
             Atk = atk * (int)(level / 2.5);
-            HP = hp;
+            MaxHP = hp;
+            CurHP = hp;
             Symbol = symbol;
             Color = color;
             Position = position;
@@ -61,23 +64,30 @@ namespace Project_P.Monsters
 
         public void TakeDamaged(int damage)
         {
-            HP -= damage;
-            if (HP <= 0)
+            CurHP -= damage;
+            if (CurHP <= 0)
             {
                 Console.WriteLine($"{Name}이(가) 쓰려졌습니다..");
+                Thread.Sleep(500);
             }
         }
         public void LevelUp(Monster target)
         {
             this.Exp += target.Exp;
             Console.WriteLine($"획득 경험치 : {target.Exp}");
+            Thread.Sleep(500);
+            if (Level > 99)
+            {
+                return;
+            }
             if ( Exp >= 1000)
             {
                 Level += 1;
                 Exp -= 1000;
                 Atk += 5;
-                HP += 20;
+                MaxHP += 20;
                 Console.WriteLine($"{Name}이(가) 레벨 {Level}로 올랐습니다!");
+                Thread.Sleep(500);
             }
         }
 
@@ -97,6 +107,15 @@ namespace Project_P.Monsters
             for (int i = 0; i < Skills.Count; i++)
             {
                 Console.WriteLine($"[{i+1}] {Skills[i].Name} | 데미지 :  {Skills[i].skillDamage} | PP :{Skills[i].CurPP}/{Skills[i].MaxPP}");
+            }
+        }
+
+        public void Heal(int amount)
+        {
+            CurHP += amount;
+            if (CurHP > MaxHP)
+            {
+                CurHP = MaxHP;
             }
         }
     }

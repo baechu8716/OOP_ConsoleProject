@@ -25,7 +25,12 @@ namespace Project_P.Scenes
             Console.WriteLine("***************************************************");
             Console.WriteLine("                1. 게임시작");
             Console.WriteLine("                2. 게임종료");
-
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("조작키 : W, A, S, D = 상하좌우 이동 / E = 인벤토리 키");
+            Console.WriteLine("도트가 깨질 수도 있으니 전체화면으로 플레이 해주세요.");
 
         }
 

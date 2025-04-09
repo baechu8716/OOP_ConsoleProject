@@ -28,7 +28,7 @@ namespace Project_P.Scenes
 
         public override void Update()
         {
-            GameManager.Player.Move(input);
+            GameManager.Player.Action(input);
         }
         public override void Result()
         {

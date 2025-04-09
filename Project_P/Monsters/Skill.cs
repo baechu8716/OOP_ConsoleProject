@@ -33,13 +33,16 @@ namespace Project_P.Monsters
             if(!CanUse())
             {
                 Console.WriteLine($"{Name}의 PP가 부족하여 사용 불가");
+                Thread.Sleep(500);
                 return;
             }
             CurPP--;
             int totalDamage = mine.Atk + skillDamage;
             target.TakeDamaged(totalDamage);
             Console.WriteLine($"{mine.Name}. {Name}!");
+            Thread.Sleep(500);
             Console.WriteLine($"{target.Name}에게 {totalDamage} 데미지를 입혔습니다.");
+            Thread.Sleep(500);
             Console.WriteLine($"{Name} (남은 PP: {CurPP}/{MaxPP})");
         }
 

@@ -1,9 +1,12 @@
 ﻿using Project_P.GameObjects;
+using Project_P.GameObjects.Items;
 using Project_P.Monsters;
 using Project_P.Scenes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -51,6 +54,8 @@ namespace Project_P
 
             player = new Player();
             player.Inventory = new Inventory(6);
+            player.Iteminventory = new ItemInventory();
+
 
             sceneDic = new Dictionary<string, BaseScene>();
             sceneDic.Add("Title", new TitleScene());

@@ -106,7 +106,7 @@ namespace Project_P.Scenes
                         if (index >= 0 && index < GameManager.Player.Inventory.monsters.Length)
                         {
                             Monster selectedMonster = GameManager.Player.Inventory.monsters[index];
-                            if (selectedMonster != null && selectedMonster.HP > 0)
+                            if (selectedMonster != null && selectedMonster.CurHP > 0)
                             {
                                 playerMonster = selectedMonster;
                                 playerMonster.Position = new Vector2(1, 1);
@@ -115,7 +115,7 @@ namespace Project_P.Scenes
                                 Console.ReadKey(true);
                                 stack.Push("Battle");
                             }
-                            else if (selectedMonster?.HP <= 0)
+                            else if (selectedMonster?.CurHP <= 0)
                             {
                                 Console.WriteLine("해당 몬스터가 전투 불능 상태입니다.");
                                 Console.ReadKey(true);
@@ -179,7 +179,7 @@ namespace Project_P.Scenes
         {
             foreach (var monster in GameManager.Player.Inventory.monsters)
             {
-                if (monster != null && monster.HP > 0)
+                if (monster != null && monster.CurHP > 0)
                     return false;
 
             }
@@ -219,12 +219,12 @@ namespace Project_P.Scenes
 
             Console.SetCursorPosition(0, 25);
             Console.WriteLine($"{playerMonster.Name}");
-            Console.WriteLine($"HP : {playerMonster.HP}");
+            Console.WriteLine($"HP : {playerMonster.CurHP} / {playerMonster.MaxHP} ");
 
             Console.SetCursorPosition(60, 25);
             Console.WriteLine($"{enemy.Name}");
             Console.SetCursorPosition(60, 26);
-            Console.WriteLine($"HP : {enemy.HP}");
+            Console.WriteLine($"HP : {enemy.CurHP} / {enemy.MaxHP}");
 
             Console.SetCursorPosition(0, 30);
             playerMonster.SkillList();
@@ -235,10 +235,12 @@ namespace Project_P.Scenes
         public void ProcessTurn()
         {
             Random randomInt = new Random();
-            if (enemy.HP <= 0)
+            if (enemy.CurHP <= 0)
             {
                 Console.SetCursorPosition(0, 25);
                 Console.WriteLine($"{enemy.Name}을(를) 쓰러뜨렸습니다!");
+                Thread.Sleep(500);
+                Console.SetCursorPosition(0, 26);
                 playerMonster.LevelUp(enemy);
                 Console.ReadKey(true);
                 stack.Clear();
@@ -247,10 +249,11 @@ namespace Project_P.Scenes
             }
 
             enemy.UseSkill(randomInt.Next(3), playerMonster);
-            if (playerMonster.HP <= 0)
+            if (playerMonster.CurHP <= 0)
             {
                 Console.SetCursorPosition(0, 25);
                 Console.WriteLine($"{playerMonster.Name}이(가) 전투 불능이 되었습니다!");
+                Thread.Sleep(500);
                 Console.ReadKey(true);
                 stack.Pop();
                 stack.Push("SelectMenu");
