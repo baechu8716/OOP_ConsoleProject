@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -58,8 +59,9 @@ namespace Project_P.Monsters
              "⬜⬜⬜⬜⬜⬜⬜⬜⬜⬛⬜🟧⬜⬛⬜⬜⬜⬜⬜⬜⬜⬜",
              "⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬛⬛⬛⬜⬜⬜⬜⬜⬜⬜⬜⬜"
         };
-        public Charmander(Vector2 position)
-            :base("파이리", "불꽃", 1, 0, 10, 100, ConsoleColor.Red, 'F', position)
+        public Charmander(Vector2 position, int level)
+            :base("파이리", "불꽃", level, 10, 500, ConsoleColor.Red, 'F', position)
+        // 이름, 타입, 레벨, exp, 공격력, 체력
         {
             AddSkill(new Skill("불꽃 세례", 40, 25));
             AddSkill(new Skill("불꽃 방사", 90, 15));

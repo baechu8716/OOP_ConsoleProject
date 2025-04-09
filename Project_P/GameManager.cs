@@ -44,8 +44,8 @@ namespace Project_P
         public static void Start()
         {
             Console.CursorVisible = false;
-            Console.SetWindowSize(150, 30); 
-            Console.SetBufferSize(150, 30);
+            Console.SetWindowSize(150, 50); 
+            Console.SetBufferSize(150, 50);
 
             gameOver = false;
 

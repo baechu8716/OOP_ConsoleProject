@@ -33,10 +33,10 @@ namespace Project_P.Scenes
                     map[y, x] = mapData[y][x] == '#' ? false : true;
                 }
             }
-
+            Random ran = new Random();
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Place("Village", new Vector2(2, 4)));
-            Monster fieldBulbasaur = MonsterFactory.Create(MonsterType.Bulbasaur, new Vector2(10, 4));
+            Monster fieldBulbasaur = MonsterFactory.Create(MonsterType.Bulbasaur, new Vector2(10, 4), ran.Next(1, 3));
             gameObjects.Add(fieldBulbasaur);
         }
         public override void Enter()

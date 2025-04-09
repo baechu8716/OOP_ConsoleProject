@@ -26,6 +26,7 @@ namespace Project_P.Scenes
             Console.WriteLine("                1. 게임시작");
             Console.WriteLine("                2. 게임종료");
 
+
         }
 
         public override void Update()

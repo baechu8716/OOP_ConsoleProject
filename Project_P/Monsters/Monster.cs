@@ -20,18 +20,18 @@ namespace Project_P.Monsters
         public Vector2 Position { get; set; }
         public char Symbol { get; set; }
         public ConsoleColor Color { get; set; }
-        protected List<Skill> Skills { get; set; }
+        public List<Skill> Skills { get; set; }
         public string scene = "Battle";
 
 
-        public Monster(string name, string type, int level, int exp, int atk, int hp, ConsoleColor color, char symbol, Vector2 position)
+        public Monster(string name, string type, int level, int atk, int hp, ConsoleColor color, char symbol, Vector2 position)
             :base(symbol, color, position, true)
         {
             Name = name;
             Type = type;
             Level = level;
-            Exp = exp;
-            Atk = atk;
+            Exp = 100 * level;
+            Atk = atk * (int)(level / 2.5);
             HP = hp;
             Symbol = symbol;
             Color = color;
@@ -67,9 +67,10 @@ namespace Project_P.Monsters
                 Console.WriteLine($"{Name}이(가) 쓰려졌습니다..");
             }
         }
-        public void LevelUp()
+        public void LevelUp(Monster target)
         {
-            
+            this.Exp += target.Exp;
+            Console.WriteLine($"획득 경험치 : {target.Exp}");
             if ( Exp >= 1000)
             {
                 Level += 1;
@@ -89,6 +90,14 @@ namespace Project_P.Monsters
         public override void Interact(Player player)
         {
             GameManager.ChangeScene(scene, this);
+        }
+
+        public void SkillList()
+        {
+            for (int i = 0; i < Skills.Count; i++)
+            {
+                Console.WriteLine($"[{i+1}] {Skills[i].Name} | 데미지 :  {Skills[i].skillDamage} | PP :{Skills[i].CurPP}/{Skills[i].MaxPP}");
+            }
         }
     }
 }

@@ -9,9 +9,9 @@ namespace Project_P.Scenes
 {
     public class SelectScene : BaseScene
     {
-        Monster startingCharmander = MonsterFactory.Create(MonsterType.Charmander, new Vector2(1, 2));
-        Monster startingBulbasaur = MonsterFactory.Create(MonsterType.Bulbasaur, new Vector2(48, 2));
-        Monster startingSquirtle = MonsterFactory.Create(MonsterType.Squirtle, new Vector2(94, 2));
+        Monster startingCharmander = MonsterFactory.Create(MonsterType.Charmander, new Vector2(1, 2), 1);
+        Monster startingBulbasaur = MonsterFactory.Create(MonsterType.Bulbasaur, new Vector2(48, 2), 1);
+        Monster startingSquirtle = MonsterFactory.Create(MonsterType.Squirtle, new Vector2(94, 2), 1);
         public SelectScene()
         {
             name = "Select";
