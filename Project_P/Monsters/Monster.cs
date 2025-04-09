@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Project_P.GameObjects;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace Project_P.Monsters
 {
-    public class Monster
+    public class Monster : GameObject
     {
         public string Name { get; set; }
         public string Type { get; set; }
@@ -19,8 +21,11 @@ namespace Project_P.Monsters
         public char Symbol { get; set; }
         public ConsoleColor Color { get; set; }
         protected List<Skill> Skills { get; set; }
+        public string scene;
+
 
         public Monster(string name, string type, int level, int exp, int atk, int hp, ConsoleColor color, char symbol, Vector2 position)
+            :base(symbol, color, position, true)
         {
             Name = name;
             Type = type;
@@ -79,6 +84,11 @@ namespace Project_P.Monsters
         {
             Console.SetCursorPosition(Position.x, Position.y);
             Console.Write(Symbol);
+        }
+
+        public override void Interact(Player player)
+        {
+            GameManager.ChangeScene(scene, this);
         }
     }
 }

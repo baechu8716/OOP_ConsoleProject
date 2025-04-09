@@ -14,7 +14,7 @@ namespace Project_P.GameObjects
         public Vector2 position;
         public bool isOnce;
 
-        public GameObject(char symbol, ConsoleColor color, Vector2 position, bool IsOnce)
+        public GameObject(char symbol, ConsoleColor color, Vector2 position, bool isOnce)
         {
             this.symbol = symbol;
             this.color = color;

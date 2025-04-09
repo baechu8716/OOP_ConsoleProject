@@ -1,4 +1,5 @@
-﻿using Project_P.Monsters;
+﻿using Project_P.GameObjects;
+using Project_P.Monsters;
 using Project_P.Scenes;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace Project_P
         public static BaseScene curScene;
         public static string prevSceneName;
         private static bool gameOver;
+        public static Monster CurrentEnemy { get; set; }
         private static Player player;
         public static Player Player { get { return player; } }
 
@@ -55,7 +57,7 @@ namespace Project_P
             sceneDic.Add("Village", new VillageScene());
             sceneDic.Add("Select", new SelectScene());
             sceneDic.Add("Field", new FieldScene());
-
+            sceneDic.Add("Battle", new BattleScene());
 
 
             // 초기 현재씬 설정
@@ -63,14 +65,14 @@ namespace Project_P
         }
 
         // 씬전환
-        public static void ChangeScene(string name)
+        public static void ChangeScene(string name, GameObject obj = null)
         {
             prevSceneName = curScene.name;
-            if (curScene.name == "Village")
-            {
-                sceneDic.Remove("Select");
-            }
             curScene = sceneDic[name];
+            if (name == "Battle" && obj is Monster monster)
+            {
+                CurrentEnemy = monster;
+            }
             curScene.Enter();
         }
 
