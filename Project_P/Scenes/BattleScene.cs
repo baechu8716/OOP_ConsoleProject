@@ -134,31 +134,34 @@ namespace Project_P.Scenes
                     else { Console.WriteLine("잘못된 선택입니다."); Console.ReadKey(true); }
                     break;
                 case "Battle":
-                    if (input == ConsoleKey.D1)
+                    if (!isItemUsed) 
                     {
-                        playerMonster.UseSkill(0, enemy);
-                        ProcessTurn(false);
-                        Console.ReadKey();
+                        if (input == ConsoleKey.D1)
+                        {
+                            playerMonster.UseSkill(0, enemy);
+                            ProcessTurn(false);
+                            Console.ReadKey();
+                        }
+                        else if (input == ConsoleKey.D2)
+                        {
+                            playerMonster.UseSkill(1, enemy);
+                            ProcessTurn(false);
+                            Console.ReadKey();
+                        }
+                        else if (input == ConsoleKey.D3)
+                        {
+                            playerMonster.UseSkill(2, enemy);
+                            ProcessTurn(false);
+                            Console.ReadKey();
+                        }
+                        else if (input == ConsoleKey.D4)
+                        {
+                            playerMonster.UseSkill(3, enemy);
+                            ProcessTurn(false);
+                            Console.ReadKey();
+                        }
                     }
-                    else if (input == ConsoleKey.D2)
-                    {
-                        playerMonster.UseSkill(1, enemy); ;
-                        ProcessTurn(false);
-                        Console.ReadKey();
-                    }
-                    else if (input == ConsoleKey.D3)
-                    {
-                        playerMonster.UseSkill(2, enemy);
-                        ProcessTurn(false);
-                        Console.ReadKey();
-                    }
-                    else if (input == ConsoleKey.D4)
-                    {
-                        playerMonster.UseSkill(3, enemy);
-                        ProcessTurn(false);
-                        Console.ReadKey();
-                    }
-                    else if (input == ConsoleKey.E)
+                    if (input == ConsoleKey.E)
                     {
                         stack.Push("Inventory");
                     }
@@ -282,7 +285,7 @@ namespace Project_P.Scenes
                 && playerMonster.Skills[2].CurPP == 0
                 && playerMonster.Skills[3].CurPP == 0))
             {
-                Console.SetCursorPosition(0, 25);
+                Console.SetCursorPosition(0, 44);
                 Console.WriteLine($"{playerMonster.Name}이(가) 전투 불능이 되었습니다!");
                 Thread.Sleep(500);
                 Console.ReadKey(true);

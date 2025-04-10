@@ -84,28 +84,30 @@ namespace Project_P
                 Console.WriteLine("1. 사용한다.");
                 Console.WriteLine("2. 버린다.");
                 Console.WriteLine("돌아가려면 0번");
-            }
+                ConsoleKey input = Console.ReadKey(true).Key;
+                switch (input)
+                {
+                    case ConsoleKey.D1:
+                        stack.Push("UseMenu");
+                        break;
+                    case ConsoleKey.D2:
+                        stack.Push("DropMenu");
+                        break;
+                    case ConsoleKey.D0:
+                        stack.Pop();
+                        break;
+                    default: break;
+
+                }
+            }     
             else
             {
                 Console.WriteLine("아이템이 없습니다.");
                 Console.WriteLine("E키를 눌러 종료.");
-                Console.ReadKey(true);
-                stack.Pop();
-            }
-
-                ConsoleKey input = Console.ReadKey(true).Key;
-            switch(input)
-            {
-                case ConsoleKey.D1:
-                    stack.Push("UseMenu");
-                    break;
-                case ConsoleKey.D2:
-                    stack.Push("DropMenu");
-                    break;
-                case ConsoleKey.D0:
-                    stack.Pop();
-                    break;
-                default: break;
+                if (Console.ReadKey(true).Key == ConsoleKey.E)
+                {
+                    stack.Clear();
+                }
             }
         }
         public void UseMenu()
@@ -169,9 +171,9 @@ namespace Project_P
             switch(input)
             {
                 case ConsoleKey.Y:
-                    selectItem.Use(); 
-                    Console.ReadKey(true);
+                    selectItem.Use();
                     stack.Clear();
+                    Console.ReadKey(true);
                     break;
                 case ConsoleKey.N:
                     stack.Pop();
