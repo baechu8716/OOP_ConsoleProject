@@ -192,6 +192,7 @@ namespace Project_P.Scenes
             if (AreAllMonstersFainted())
             {
                 Console.WriteLine("모든 몬스터가 전투불능 상태입니다.");
+                Console.ReadKey(true);
                 stack.Clear();
                 GameManager.ChangeScene("Field");
                 return;
@@ -206,7 +207,6 @@ namespace Project_P.Scenes
         {
             Console.WriteLine($"{GameManager.Player.Inventory.monsters[index].Name}를(을) 내보내시겠습니까?");
             Console.WriteLine("Y / N");
-
         }
 
         public void Battle()

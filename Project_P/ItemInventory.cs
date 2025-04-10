@@ -201,8 +201,34 @@ namespace Project_P
             switch (input)
             {
                 case ConsoleKey.Y:
-                    Console.WriteLine($"{selectItem.name}을 버렸습니다.");
-                    items.Remove(selectItem);
+                    Console.WriteLine($"몇개 버리시겠습니까? 현재 아이템 개수 : {selectItem.count}");
+                    bool isTrue = false;
+                    do
+                    {
+                        if(int.TryParse(Console.ReadLine(),out int useCount))
+                        {
+                            if (useCount > 0 && useCount < selectItem.count)
+                            {
+                                selectItem.count -= useCount;
+                                isTrue = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine($"1부터 {selectItem.count}사이의  값을 입력하세요.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("유효한 숫자를 입력해주세요");
+                        }
+                    }
+                    while (!isTrue);
+                    Console.WriteLine($"{selectItem.name}을 버렸습니다. 남은 아이템 개수 : {selectItem.count}");
+                    if (selectItem.count <= 0)
+                    {
+                        items.Remove(selectItem);
+                    }
+                    Console.ReadKey(true);
                     stack.Pop();
                     break;
                 case ConsoleKey.N:
