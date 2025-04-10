@@ -60,7 +60,7 @@ namespace Project_P.Monsters.Pokemons
         };
         public Butterfree(Vector2 position, int level)
             : base("버터플", "벌레", level, 10, 500, ConsoleColor.Yellow, 'B', position)
-        // 이름, 타입, 레벨, exp, 공격력, 체력
+        // 이름, 타입, 레벨, 공격력, 체력
         {
             AddSkill(new Skill("염동력", 50, 25));
             AddSkill(new Skill("환상빔", 65, 20));

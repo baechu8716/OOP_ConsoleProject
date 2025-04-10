@@ -1,5 +1,4 @@
-﻿using Project_P.GameObjects.Items;
-using Project_P.GameObjects;
+﻿using Project_P.GameObjects;
 using Project_P.Monsters;
 using System;
 using System.Collections.Generic;
@@ -9,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Project_P.Scenes
 {
-    public class CaveScene_1 : Map
+    public class CaveScene_2 : Map
     {
-        public CaveScene_1()
+        public CaveScene_2()
         {
-            name = "Cave_1";
+            name = "Cave_2";
             mapData = new string[]
             {
                 "####################",
@@ -35,18 +34,18 @@ namespace Project_P.Scenes
             }
             Random ran = new Random();
             gameObjects = new List<GameObject>();
-            gameObjects.Add(new Place("Field", new Vector2(10, 4)));
-            gameObjects.Add(new Place("Cave_2", new Vector2(10, 1)));
-            Monster caveBulbasaur = MonsterFactory.Create(MonsterType.Bulbasaur, new Vector2(ran.Next(2,19), 1), ran.Next(5, 10));
-            Monster caveCharmander = MonsterFactory.Create(MonsterType.Charmander, new Vector2(ran.Next(2, 19), 2), ran.Next(5, 10));
-            Monster caveSquirtle = MonsterFactory.Create(MonsterType.Squirtle, new Vector2(ran.Next(2, 19), 2), ran.Next(5, 10));
-            gameObjects.Add(caveBulbasaur);
-            gameObjects.Add(caveCharmander);
-            gameObjects.Add(caveSquirtle);
+            gameObjects.Add(new Place("Cave_1", new Vector2(10, 4)));
+            gameObjects.Add(new Place("Boss", new Vector2(10, 1)));
+            Monster caveButterfree = MonsterFactory.Create(MonsterType.Butterfree, new Vector2(ran.Next(2, 19), 1), ran.Next(10, 15));
+            Monster caveNidorino = MonsterFactory.Create(MonsterType.Nidorino, new Vector2(ran.Next(2, 19), 2), ran.Next(10, 15));
+            Monster caveScyther = MonsterFactory.Create(MonsterType.Scyther, new Vector2(ran.Next(2, 19), 2), ran.Next(10, 15));
+            gameObjects.Add(caveButterfree);
+            gameObjects.Add(caveNidorino);
+            gameObjects.Add(caveScyther);
         }
         public override void Enter()
         {
-            if (GameManager.prevSceneName == "Field")
+            if (GameManager.prevSceneName == "Cave_1")
             {
                 GameManager.Player.Position = new Vector2(10, 3);
             }
@@ -54,7 +53,7 @@ namespace Project_P.Scenes
             {
                 GameManager.Player.Position = new Vector2(10, 3);
             }
-            else if (GameManager.prevSceneName == "Cave_2")
+            else if (GameManager.prevSceneName == "Boss")
             {
                 GameManager.Player.Position = new Vector2(10, 2);
             }

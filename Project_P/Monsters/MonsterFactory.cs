@@ -23,6 +23,10 @@ namespace Project_P.Monsters
                     return new Nidorino(position, level);
                 case MonsterType.Butterfree:
                     return new Butterfree(position, level);
+                case MonsterType.Scyther:
+                    return new Scyther(position, level);
+                case MonsterType.Ho_oh:
+                    return new Ho_oh(position, level);
                 default:
                     throw new ArgumentException("알 수 없는 몬스터 타입");
             }

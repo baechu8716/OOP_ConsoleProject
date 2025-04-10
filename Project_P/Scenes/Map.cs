@@ -15,7 +15,7 @@ namespace Project_P.Scenes
 
         public override void Render()
         {
-            Console.WriteLine($"{GameManager.curScene.name}");
+            Console.WriteLine($"{GameManager.curScene.name} 이전씬 {GameManager.prevSceneName}");
             PrintMap();
             foreach(GameObject gameobject in gameObjects)
             {

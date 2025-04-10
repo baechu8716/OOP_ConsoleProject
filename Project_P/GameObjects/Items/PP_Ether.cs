@@ -14,8 +14,9 @@ namespace Project_P.GameObjects.Items
         {
             int index = -1;
             int useCount = 0;
-            Console.WriteLine("PP에이드를 사용할 몬스터를 지정해주세요");
             Console.Clear();
+            Console.WriteLine("PP에이드를 사용할 몬스터를 지정해주세요");
+            
             GameManager.Player.Inventory.PrintAll();
             ConsoleKey input = Console.ReadKey(true).Key;
             switch (input)
@@ -65,7 +66,7 @@ namespace Project_P.GameObjects.Items
             {
                 if (int.TryParse(Console.ReadLine(), out useCount))
                 {
-                    if (useCount > 0 && useCount <= selectMonster.Skills.Count)
+                    if (useCount > 0 && useCount <= 4)
                     {
                         correctInput = true;
                     }
@@ -87,7 +88,7 @@ namespace Project_P.GameObjects.Items
                 return;
             }
 
-            selectMonster.PP_Heal(useCount-1);
+            selectMonster.PP_Heal(useCount);
             count -= 1;
             if (count <= 0)
             {

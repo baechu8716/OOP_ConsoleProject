@@ -33,8 +33,8 @@ namespace Project_P.Monsters
             Type = type;
             Level = level;
             Exp = 100 * level;
-            Atk = atk * (int)(level / 2.5);
-            MaxHP = hp;
+            Atk = atk + (int)(level + 1);
+            MaxHP = hp + (int)(level * 10);
             CurHP = hp;
             Symbol = symbol;
             Color = color;
@@ -122,9 +122,9 @@ namespace Project_P.Monsters
         public void PP_Heal(int i)
         {
             Skills[i].CurPP += 5;
-            if (Skills[i].CurPP > Skills[i].MaxPP)
+            if (Skills[i-1].CurPP > Skills[i - 1].MaxPP)
             {
-                Skills[i].CurPP = Skills[i].MaxPP;
+                Skills[i - 1].CurPP = Skills[i - 1].MaxPP;
             }
         }
     }

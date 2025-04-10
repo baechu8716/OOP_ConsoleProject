@@ -10,6 +10,7 @@ namespace Project_P.Scenes
         private Monster playerMonster;
         int index = -1;
         private bool isItemUsed = false;
+        public string previousScene;
 
         public BattleScene()
         {
@@ -71,7 +72,7 @@ namespace Project_P.Scenes
                         Console.WriteLine("도망갑니다...");
                         Console.ReadKey(true);
                         stack.Pop();
-                        GameManager.ChangeScene("Field");
+                        GameManager.ChangeScene(GameManager.prevSceneName);
                     }
                     break;
                 case "SelectMenu":
@@ -80,7 +81,7 @@ namespace Project_P.Scenes
                     {
                         Console.WriteLine("전투를 종료합니다...");
                         stack.Pop();
-                        GameManager.ChangeScene("Field");
+                        GameManager.ChangeScene(GameManager.prevSceneName);
                     }
                     else
                     {
@@ -165,7 +166,7 @@ namespace Project_P.Scenes
                     {
                         ProcessTurn(true);
                         Console.ReadKey(true);
-
+                        isItemUsed = false;
                     }
                     break;
                 default: break;
@@ -181,11 +182,12 @@ namespace Project_P.Scenes
 
         public void Meet()
         {
+            Console.WriteLine($"{GameManager.curScene.name} 이전씬 {GameManager.prevSceneName}");
             Console.WriteLine($"야생의 {enemy.Name}(이)가 나타났다!");
             Thread.Sleep(500);
             enemy.Position = new Vector2(1, 2);
             enemy.Print(true);
-            Console.SetCursorPosition(1, 20);
+            Console.SetCursorPosition(1, 30);
             Console.WriteLine("어떻게 할까?");
             Console.WriteLine("1. 싸운다");
             Console.WriteLine("2. 도망간다.");
@@ -210,7 +212,7 @@ namespace Project_P.Scenes
                 Console.WriteLine("모든 몬스터가 전투불능 상태입니다.");
                 Console.ReadKey(true);
                 stack.Clear();
-                GameManager.ChangeScene("Field");
+                GameManager.ChangeScene(GameManager.prevSceneName);
                 return;
             }
             Console.WriteLine("어느 몬스터를 내보내겠습니까?");
@@ -230,19 +232,19 @@ namespace Project_P.Scenes
             playerMonster.Print();
             enemy.Print(true);
 
-            Console.SetCursorPosition(0, 23);
+            Console.SetCursorPosition(0, 27);
             Console.WriteLine($"턴 {turnCount + 1}: {playerMonster.Name} vs {enemy.Name}");
 
-            Console.SetCursorPosition(0, 25);
+            Console.SetCursorPosition(0, 29);
             Console.WriteLine($"{playerMonster.Name}");
             Console.WriteLine($"HP : {playerMonster.CurHP} / {playerMonster.MaxHP} ");
 
-            Console.SetCursorPosition(60, 25);
+            Console.SetCursorPosition(60, 29);
             Console.WriteLine($"{enemy.Name}");
-            Console.SetCursorPosition(60, 26);
+            Console.SetCursorPosition(60, 29);
             Console.WriteLine($"HP : {enemy.CurHP} / {enemy.MaxHP}");
 
-            Console.SetCursorPosition(0, 30);
+            Console.SetCursorPosition(0, 34);
             playerMonster.SkillList();
             Console.WriteLine("사용할 기술을 선택하세요(1~4) | E : 인벤토리 열기");
         }
@@ -252,14 +254,22 @@ namespace Project_P.Scenes
             Random randomInt = new Random();
             if (enemy.CurHP <= 0)
             {
-                Console.SetCursorPosition(0, 25);
+                Console.SetCursorPosition(0, 44);
                 Console.WriteLine($"{enemy.Name}을(를) 쓰러뜨렸습니다!");
                 Thread.Sleep(500);
-                Console.SetCursorPosition(0, 26);
+                Console.SetCursorPosition(0, 45);
                 playerMonster.LevelUp(enemy);
                 Console.ReadKey(true);
                 stack.Clear();
-                GameManager.ChangeScene("Field");
+                if (enemy.Name == "칠색조")
+                {
+                    GameManager.GameOver("보스 몬스터를 잡았습니다. 게임 클리어!");
+                }
+                else
+                {
+                    GameManager.ChangeScene(GameManager.prevSceneName);
+                }
+                this.isItemUsed = false;
                 return;
             }
             if (!isItemUsed)
@@ -278,9 +288,11 @@ namespace Project_P.Scenes
                 Console.ReadKey(true);
                 stack.Pop();
                 stack.Push("SelectMenu");
+                this.isItemUsed = false;
                 return;
             }
             turnCount++;
+            this.isItemUsed = false;
         }
     }
 }

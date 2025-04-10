@@ -49,7 +49,7 @@ namespace Project_P.Scenes
             }
             if (GameManager.prevSceneName == "Field")
             {
-                GameManager.Player.Position = new Vector2(16, 1);
+                GameManager.Player.Position = new Vector2(16, 2);
             }
             GameManager.Player.Map = map;
         }

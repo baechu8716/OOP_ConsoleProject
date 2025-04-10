@@ -53,7 +53,7 @@ namespace Project_P.Monsters.Pokemons
         };
         public Squirtle(Vector2 position, int level)
             : base("꼬부기", "물", level, 10, 500, ConsoleColor.Blue, 'G', position)
-        // 이름, 타입, 레벨, exp, 공격력, 체력
+        // 이름, 타입, 레벨, 공격력, 체력
         {
             AddSkill(new Skill("몸통 박치기", 35, 35));
             AddSkill(new Skill("거품", 20, 30));

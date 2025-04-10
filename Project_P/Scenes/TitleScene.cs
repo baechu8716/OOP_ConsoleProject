@@ -47,7 +47,7 @@ namespace Project_P.Scenes
                     GameManager.ChangeScene("Select");
                     break;
                 case ConsoleKey.D2:
-                    GameManager.End();
+                    GameManager.GameOver("게임 종료");
                     break;
 
             }

@@ -40,7 +40,7 @@ namespace Project_P.GameObjects.Items
                         GameManager.Player.Iteminventory.Remove(this);
                     }
                     Console.ReadKey(true);
-                    GameManager.ChangeScene("Field");
+                    GameManager.ChangeScene(GameManager.prevSceneName);
                     return;
                 }
                 else

@@ -53,7 +53,7 @@ namespace Project_P.Monsters.Pokemons
         };
         public Bulbasaur(Vector2 position, int level)
             : base("이상해씨", "풀", level, 10, 500, ConsoleColor.Green, 'E', position)
-            // 이름, 타입, 레벨, exp, 공격력, 체력
+            // 이름, 타입, 레벨, 공격력, 체력
         {
             AddSkill(new Skill("몸통 박치기", 35, 35));
             AddSkill(new Skill("덩쿨 채찍", 35, 10));

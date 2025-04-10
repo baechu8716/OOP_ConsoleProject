@@ -12,6 +12,8 @@ namespace Project_P.Monsters
         Bulbasaur,
         Squirtle,
         Butterfree,
-        Nidorino
+        Nidorino,
+        Scyther,
+        Ho_oh
     }
 }

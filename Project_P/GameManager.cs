@@ -28,19 +28,16 @@ namespace Project_P
             Start();
 
             while(gameOver == false)
-            {    
+            {
+                Console.Clear();
                 curScene.Render();
                 curScene.Input();
                 Console.WriteLine();
                 curScene.Update();
                 Console.WriteLine();
                 curScene.Result();
-                Console.WriteLine();
-                Console.Clear();
+                Console.WriteLine();  
             }
-            
-
-            End();
         }
 
         // 게임 초기 설정
@@ -64,6 +61,8 @@ namespace Project_P
             sceneDic.Add("Field", new FieldScene());
             sceneDic.Add("Battle", new BattleScene());
             sceneDic.Add("Cave_1", new CaveScene_1());
+            sceneDic.Add("Cave_2", new CaveScene_2());
+            sceneDic.Add("Boss", new BossScene());
 
 
             // 초기 현재씬 설정
@@ -83,8 +82,15 @@ namespace Project_P
         }
 
         // 게임이 끝났을때
-        public static void End()
+        public static void GameOver(string reason)
         {
+            Console.Clear();
+            Console.WriteLine("************************");
+            Console.WriteLine("*         END...       *");
+            Console.WriteLine("************************");
+            Console.WriteLine();
+            Console.WriteLine(reason);
+
             gameOver = true;
         }
     }

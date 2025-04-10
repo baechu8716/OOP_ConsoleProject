@@ -25,9 +25,16 @@ namespace Project_P
             {
                 if (monsters[i] != null)
                 {
-                    if (monsters[i].CurHP <= 0)
+                    if (monsters[i].CurHP <= 0 )
                     {
                         Console.WriteLine($"{i + 1}. {monsters[i].Name}\t기절상태");
+                    }
+                    else if ((monsters[i].Skills[0].CurPP == 0
+                        && monsters[i].Skills[1].CurPP == 0
+                        && monsters[i].Skills[2].CurPP == 0
+                        && monsters[i].Skills[3].CurPP == 0))
+                    {
+                        Console.WriteLine($"{i + 1}. {monsters[i].Name}\t전투불가");
                     }
                     Console.WriteLine($"{i + 1}. {monsters[i].Name}");
                 }
