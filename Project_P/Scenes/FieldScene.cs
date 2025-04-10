@@ -1,4 +1,5 @@
 ﻿using Project_P.GameObjects;
+using Project_P.GameObjects.Items;
 using Project_P.Monsters;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,8 @@ namespace Project_P.Scenes
             Random ran = new Random();
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Place("Village", new Vector2(2, 4)));
+            gameObjects.Add(new Place("Cave", new Vector2(10, 1)));
+            gameObjects.Add(new MonsterBall(10, new Vector2(18, 4)));
             Monster fieldBulbasaur = MonsterFactory.Create(MonsterType.Bulbasaur, new Vector2(10, 4), ran.Next(1, 3));
             gameObjects.Add(fieldBulbasaur);
         }
@@ -48,6 +51,10 @@ namespace Project_P.Scenes
             else if (GameManager.prevSceneName == "Battle")
             {
                 GameManager.Player.Position = new Vector2(10, 4);
+            }
+            else if (GameManager.prevSceneName == "Cave_1")
+            {
+                GameManager.Player.Position = new Vector2(11, 3);
             }
             GameManager.Player.Map = map;
         }

@@ -37,7 +37,9 @@ namespace Project_P.Scenes
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Place("Field", new Vector2(16, 1)));
             gameObjects.Add(new Potion(10, new Vector2(3, 1)));
-            gameObjects.Add(new Potion(10, new Vector2(8, 1)));
+            gameObjects.Add(new Potion(10, new Vector2(10, 1)));
+            gameObjects.Add(new PP_Ether(1, new Vector2(11, 1)));
+            gameObjects.Add(new MonsterBall(5, new Vector2(3, 2)));
         }
         public override void Enter()
         {

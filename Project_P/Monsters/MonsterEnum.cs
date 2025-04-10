@@ -10,6 +10,8 @@ namespace Project_P.Monsters
     {
         Charmander,
         Bulbasaur,
-        Squirtle
+        Squirtle,
+        Butterfree,
+        Nidorino
     }
 }

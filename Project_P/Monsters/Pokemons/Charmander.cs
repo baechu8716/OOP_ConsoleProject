@@ -6,7 +6,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_P.Monsters
+namespace Project_P.Monsters.Pokemons
 {
     public class Charmander : Monster
     {
@@ -72,7 +72,7 @@ namespace Project_P.Monsters
         // 적일 경우 좌우 대칭하여 출력
         public override void Print(bool isEnemy)
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.OutputEncoding = Encoding.UTF8;
             for (int y = 0; y < charmander.Length; y++)
             {
                 Console.SetCursorPosition(Position.x, Position.y + y);

@@ -14,7 +14,7 @@ namespace Project_P
 {
     public static class GameManager
     {
-        private static Dictionary<string, BaseScene> sceneDic;
+        private static Dictionary<string, BaseScene>? sceneDic;
         public static BaseScene curScene;
         public static string prevSceneName;
         private static bool gameOver;
@@ -63,6 +63,7 @@ namespace Project_P
             sceneDic.Add("Select", new SelectScene());
             sceneDic.Add("Field", new FieldScene());
             sceneDic.Add("Battle", new BattleScene());
+            sceneDic.Add("Cave_1", new CaveScene_1());
 
 
             // 초기 현재씬 설정

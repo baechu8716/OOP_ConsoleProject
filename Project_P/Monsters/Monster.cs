@@ -118,5 +118,14 @@ namespace Project_P.Monsters
                 CurHP = MaxHP;
             }
         }
+
+        public void PP_Heal(int i)
+        {
+            Skills[i].CurPP += 5;
+            if (Skills[i].CurPP > Skills[i].MaxPP)
+            {
+                Skills[i].CurPP = Skills[i].MaxPP;
+            }
+        }
     }
 }

@@ -69,6 +69,7 @@ namespace Project_P.Scenes
                     else if (input == ConsoleKey.D2)
                     {
                         Console.WriteLine("도망갑니다...");
+                        Console.ReadKey(true);
                         stack.Pop();
                         GameManager.ChangeScene("Field");
                     }
@@ -181,6 +182,7 @@ namespace Project_P.Scenes
         public void Meet()
         {
             Console.WriteLine($"야생의 {enemy.Name}(이)가 나타났다!");
+            Thread.Sleep(500);
             enemy.Position = new Vector2(1, 2);
             enemy.Print(true);
             Console.SetCursorPosition(1, 20);
@@ -265,7 +267,10 @@ namespace Project_P.Scenes
 
             }
             enemy.UseSkill(randomInt.Next(3), playerMonster);
-            if (playerMonster.CurHP <= 0)
+            if (playerMonster.CurHP <= 0 || (playerMonster.Skills[0].CurPP == 0
+                && playerMonster.Skills[1].CurPP == 0
+                && playerMonster.Skills[2].CurPP == 0
+                && playerMonster.Skills[3].CurPP == 0))
             {
                 Console.SetCursorPosition(0, 25);
                 Console.WriteLine($"{playerMonster.Name}이(가) 전투 불능이 되었습니다!");

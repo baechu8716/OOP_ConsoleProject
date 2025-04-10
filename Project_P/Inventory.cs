@@ -25,11 +25,11 @@ namespace Project_P
             {
                 if (monsters[i] != null)
                 {
-                    Console.WriteLine($"{i+1}. {monsters[i].Name}");
                     if (monsters[i].CurHP <= 0)
                     {
                         Console.WriteLine($"{i + 1}. {monsters[i].Name}\t기절상태");
                     }
+                    Console.WriteLine($"{i + 1}. {monsters[i].Name}");
                 }
                 else
                 {

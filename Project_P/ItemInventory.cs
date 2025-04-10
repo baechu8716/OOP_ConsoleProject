@@ -88,7 +88,7 @@ namespace Project_P
             else
             {
                 Console.WriteLine("아이템이 없습니다.");
-                Console.WriteLine("아무키나 눌러 종료...");
+                Console.WriteLine("E키를 눌러 종료.");
                 Console.ReadKey(true);
                 stack.Pop();
             }
@@ -171,7 +171,7 @@ namespace Project_P
                 case ConsoleKey.Y:
                     selectItem.Use(); 
                     Console.ReadKey(true);
-                    stack.Pop();
+                    stack.Clear();
                     break;
                 case ConsoleKey.N:
                     stack.Pop();
