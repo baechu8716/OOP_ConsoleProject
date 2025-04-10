@@ -5,17 +5,16 @@ namespace Project_P.Scenes
     public class BattleScene : BaseScene
     {
         public int turnCount;
-        private bool battleOver;
         private Stack<string> stack;
-        private Monster enemy;
+        public Monster enemy;
         private Monster playerMonster;
         int index = -1;
+        private bool isItemUsed = false;
 
         public BattleScene()
         {
             name = "Battle";
             turnCount = 0;
-            battleOver = false;
             stack = new Stack<string>();
         }
         public override void Enter()
@@ -44,7 +43,11 @@ namespace Project_P.Scenes
                 case "Battle":
                     Battle();
                     break;
-
+                case "Inventory":
+                    GameManager.Player.Iteminventory.Open();
+                    stack.Pop();
+                    isItemUsed = true;
+                    break;
                 default: break;
             }
         }
@@ -132,32 +135,43 @@ namespace Project_P.Scenes
                     if (input == ConsoleKey.D1)
                     {
                         playerMonster.UseSkill(0, enemy);
-                        ProcessTurn();
+                        ProcessTurn(false);
                         Console.ReadKey();
                     }
                     else if (input == ConsoleKey.D2)
                     {
                         playerMonster.UseSkill(1, enemy); ;
-                        ProcessTurn();
+                        ProcessTurn(false);
                         Console.ReadKey();
                     }
                     else if (input == ConsoleKey.D3)
                     {
                         playerMonster.UseSkill(2, enemy);
-                        ProcessTurn();
+                        ProcessTurn(false);
                         Console.ReadKey();
                     }
                     else if (input == ConsoleKey.D4)
                     {
                         playerMonster.UseSkill(3, enemy);
-                        ProcessTurn();
+                        ProcessTurn(false);
                         Console.ReadKey();
+                    }
+                    else if (input == ConsoleKey.E)
+                    {
+                        stack.Push("Inventory");
+                    }
+                    else if (isItemUsed)
+                    {
+                        ProcessTurn(true);
+                        Console.ReadKey(true);
+
                     }
                     break;
                 default: break;
+
+
             }
         }
-
 
         public override void Result()
         {
@@ -228,11 +242,10 @@ namespace Project_P.Scenes
 
             Console.SetCursorPosition(0, 30);
             playerMonster.SkillList();
-            Console.WriteLine("사용할 기술을 선택하세요");
-            Console.ReadKey(true);  
+            Console.WriteLine("사용할 기술을 선택하세요(1~4) | E : 인벤토리 열기");
         }
 
-        public void ProcessTurn()
+        public void ProcessTurn(bool isItemUsed)
         {
             Random randomInt = new Random();
             if (enemy.CurHP <= 0)
@@ -247,7 +260,10 @@ namespace Project_P.Scenes
                 GameManager.ChangeScene("Field");
                 return;
             }
+            if (!isItemUsed)
+            {
 
+            }
             enemy.UseSkill(randomInt.Next(3), playerMonster);
             if (playerMonster.CurHP <= 0)
             {
@@ -259,7 +275,6 @@ namespace Project_P.Scenes
                 stack.Push("SelectMenu");
                 return;
             }
-
             turnCount++;
         }
     }

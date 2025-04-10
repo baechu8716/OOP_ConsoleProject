@@ -44,6 +44,7 @@ namespace Project_P.Monsters
             Console.WriteLine($"{target.Name}에게 {totalDamage} 데미지를 입혔습니다.");
             Thread.Sleep(500);
             Console.WriteLine($"{Name} (남은 PP: {CurPP}/{MaxPP})");
+            Thread.Sleep(500);
         }
 
     }

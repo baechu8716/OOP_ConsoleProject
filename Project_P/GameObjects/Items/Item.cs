@@ -30,6 +30,5 @@ namespace Project_P.GameObjects.Items
         }
 
         public abstract void Use();
-        public abstract void Use(Monster monster, int useCount);
     }
 }
