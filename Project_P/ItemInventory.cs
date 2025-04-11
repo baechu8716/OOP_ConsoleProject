@@ -14,6 +14,7 @@ namespace Project_P
         public List<Item> items;
         public Stack<string> stack;
         public int selectIndex;
+        public bool isItemUsed { get; set; }
         public ItemInventory()
         {
             items = new List<Item>();
@@ -22,6 +23,7 @@ namespace Project_P
         public void UseItem(int index)
         {
             items[index].Use();
+            isItemUsed = true;
         }
         public void Add(Item item)
         {
@@ -47,7 +49,7 @@ namespace Project_P
         
         public void Open()
         {
-            
+            isItemUsed = false;
             stack.Push("Menu");
             while(stack.Count > 0)
             {
@@ -82,7 +84,10 @@ namespace Project_P
             {
                 Print();
                 Console.WriteLine("1. 사용한다.");
-                Console.WriteLine("2. 버린다.");
+                if (GameManager.isBattleOn == false)
+                {
+                    Console.WriteLine("2. 버린다.");
+                }
                 Console.WriteLine("돌아가려면 0번");
                 ConsoleKey input = Console.ReadKey(true).Key;
                 switch (input)
@@ -91,10 +96,13 @@ namespace Project_P
                         stack.Push("UseMenu");
                         break;
                     case ConsoleKey.D2:
-                        stack.Push("DropMenu");
+                        if (GameManager.isBattleOn == false)
+                        {
+                            stack.Push("DropMenu");
+                        } 
                         break;
                     case ConsoleKey.D0:
-                        stack.Pop();
+                        stack.Clear();
                         break;
                     default: break;
 
@@ -103,8 +111,8 @@ namespace Project_P
             else
             {
                 Console.WriteLine("아이템이 없습니다.");
-                Console.WriteLine("E키를 눌러 종료.");
-                if (Console.ReadKey(true).Key == ConsoleKey.E)
+                Console.WriteLine("0키를 두번 눌러 종료.");
+                if (Console.ReadKey(true).Key == ConsoleKey.D0)
                 {
                     stack.Clear();
                 }
@@ -120,6 +128,7 @@ namespace Project_P
             if (input == ConsoleKey.D0)
             {
                 stack.Pop();
+                isItemUsed = false;
             }
             else
             {

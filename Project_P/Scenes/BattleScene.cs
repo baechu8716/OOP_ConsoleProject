@@ -10,7 +10,6 @@ namespace Project_P.Scenes
         private Monster playerMonster;
         int index = -1;
         private bool isItemUsed = false;
-        public string previousScene;
 
         public BattleScene()
         {
@@ -47,7 +46,7 @@ namespace Project_P.Scenes
                 case "Inventory":
                     GameManager.Player.Iteminventory.Open();
                     stack.Pop();
-                    isItemUsed = true;
+                    isItemUsed = GameManager.Player.Iteminventory.isItemUsed;
                     break;
                 default: break;
             }
@@ -70,6 +69,7 @@ namespace Project_P.Scenes
                     else if (input == ConsoleKey.D2)
                     {
                         Console.WriteLine("도망갑니다...");
+                        GameManager.isBattleOn = false;
                         Console.ReadKey(true);
                         stack.Pop();
                         GameManager.ChangeScene(GameManager.prevSceneName);
@@ -80,6 +80,8 @@ namespace Project_P.Scenes
                     if (input == ConsoleKey.D0)
                     {
                         Console.WriteLine("전투를 종료합니다...");
+                        Console.ReadKey(true);
+                        GameManager.isBattleOn = false;
                         stack.Pop();
                         GameManager.ChangeScene(GameManager.prevSceneName);
                     }
@@ -139,35 +141,44 @@ namespace Project_P.Scenes
                         if (input == ConsoleKey.D1)
                         {
                             playerMonster.UseSkill(0, enemy);
-                            ProcessTurn(false);
+                            ProcessTurn();
                             Console.ReadKey();
                         }
                         else if (input == ConsoleKey.D2)
                         {
                             playerMonster.UseSkill(1, enemy);
-                            ProcessTurn(false);
+                            ProcessTurn();
                             Console.ReadKey();
                         }
                         else if (input == ConsoleKey.D3)
                         {
                             playerMonster.UseSkill(2, enemy);
-                            ProcessTurn(false);
+                            ProcessTurn();
                             Console.ReadKey();
                         }
                         else if (input == ConsoleKey.D4)
                         {
                             playerMonster.UseSkill(3, enemy);
-                            ProcessTurn(false);
+                            ProcessTurn();
                             Console.ReadKey();
                         }
+                        else if (input == ConsoleKey.E)
+                        {
+                            stack.Push("Inventory");
+                        }
+                        else if (input == ConsoleKey.D0)
+                        {
+                            Console.WriteLine("전투를 종료합니다...");
+                            GameManager.isBattleOn = false;
+                            Console.ReadKey(true);
+                            stack.Pop();
+                            GameManager.ChangeScene(GameManager.prevSceneName);
+                        }
                     }
-                    if (input == ConsoleKey.E)
+
+                    else
                     {
-                        stack.Push("Inventory");
-                    }
-                    else if (isItemUsed)
-                    {
-                        ProcessTurn(true);
+                        ProcessTurn();
                         Console.ReadKey(true);
                         isItemUsed = false;
                     }
@@ -213,6 +224,7 @@ namespace Project_P.Scenes
             if (AreAllMonstersFainted())
             {
                 Console.WriteLine("모든 몬스터가 전투불능 상태입니다.");
+                GameManager.isBattleOn = false;
                 Console.ReadKey(true);
                 stack.Clear();
                 GameManager.ChangeScene(GameManager.prevSceneName);
@@ -250,9 +262,11 @@ namespace Project_P.Scenes
             Console.SetCursorPosition(0, 34);
             playerMonster.SkillList();
             Console.WriteLine("사용할 기술을 선택하세요(1~4) | E : 인벤토리 열기");
+            Console.SetCursorPosition(0, 34);
+            Console.WriteLine("도망가기는 0");
         }
 
-        public void ProcessTurn(bool isItemUsed)
+        public void ProcessTurn()
         {
             Random randomInt = new Random();
             if (enemy.CurHP <= 0)
@@ -263,6 +277,7 @@ namespace Project_P.Scenes
                 Console.SetCursorPosition(0, 45);
                 playerMonster.LevelUp(enemy);
                 Console.ReadKey(true);
+                GameManager.isBattleOn = false;
                 stack.Clear();
                 if (enemy.Name == "칠색조")
                 {
@@ -274,10 +289,6 @@ namespace Project_P.Scenes
                 }
                 this.isItemUsed = false;
                 return;
-            }
-            if (!isItemUsed)
-            {
-
             }
             enemy.UseSkill(randomInt.Next(3), playerMonster);
             if (playerMonster.CurHP <= 0 || (playerMonster.Skills[0].CurPP == 0
