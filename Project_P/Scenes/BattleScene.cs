@@ -261,9 +261,7 @@ namespace Project_P.Scenes
 
             Console.SetCursorPosition(0, 34);
             playerMonster.SkillList();
-            Console.WriteLine("사용할 기술을 선택하세요(1~4) | E : 인벤토리 열기");
-            Console.SetCursorPosition(0, 34);
-            Console.WriteLine("도망가기는 0");
+            Console.WriteLine("사용할 기술을 선택하세요(1~4) | E : 인벤토리 열기 | 도망가기는 0");
         }
 
         public void ProcessTurn()
